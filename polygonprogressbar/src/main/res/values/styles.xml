@@ -1,0 +1,14 @@
+<resources>
+
+    <declare-styleable name="PolygonProgressBar">
+        <attr name="progressBar_size" format="dimension"/>
+        <attr name="stroke_thickness" format="dimension"/>
+        <attr name="progressBar_color" format="color"/>
+        <attr name="animation_duration" format="integer"/>
+        <attr name="number_of_progressBar_polygonSides" format="integer"/>
+        <attr name="number_of_progressBar_polygons" format="integer" />
+        <attr name="polygon_animation_degree_delay" format="integer"/>
+        <attr name="draw_polygon_diagonals" format="boolean"/>
+    </declare-styleable>
+
+</resources>
