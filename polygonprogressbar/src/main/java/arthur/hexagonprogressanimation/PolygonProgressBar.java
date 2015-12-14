@@ -16,11 +16,11 @@ import android.view.animation.Interpolator;
 public class PolygonProgressBar extends View {
 
     /* TODO default optimal values for size/other_attributes */
-    private static final float DEFAULT_PROGRESSBAR_SIZE = 600f;//150f;
-    private static final float DEFAULT_STROKE_THICKNESS = 5;
+    private static final float DEFAULT_PROGRESSBAR_SIZE = 150f;
+    private static final float DEFAULT_STROKE_THICKNESS = 2;
     private static final int DEFAULT_NUMBER_OF_POLYGON_SIDES = 6;
-    private static final int DEFAULT_ANIMATION_DURATION = 5000;
-    private static final int DEFAULT_NUMBER_OF_POLYGONS = 20;
+    private static final int DEFAULT_ANIMATION_DURATION = 2500;
+    private static final int DEFAULT_NUMBER_OF_POLYGONS = 6;
     private static final int DEFAULT_POLYGON_ANIMATION_DEGREE_DELAY = 20;
     private static final boolean DEFAULT_DRAW_DIAGONALS = false;
 
@@ -111,10 +111,11 @@ public class PolygonProgressBar extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-//        if(mProgressAnimation.isStarted()) //TODO toggle turning off drawing
-            for(int polygonIndex = 1; polygonIndex <= mNumberOfPolygons; polygonIndex++) {
+        if (mProgressAnimation.isStarted()) {
+            for (int polygonIndex = 1; polygonIndex <= mNumberOfPolygons; polygonIndex++) {
                 drawProgressBarAnimation(canvas, ((float) polygonIndex / mNumberOfPolygons), polygonIndex);
             }
+        }
     }
 
     private void drawProgressBarAnimation(Canvas canvas, float polygonRadiusRatio, int polygonIndex) {
@@ -150,7 +151,7 @@ public class PolygonProgressBar extends View {
     }
 
     private double getDegreeDelayForPolygon(int polygonIndex) {
-        float rotationDelay = DEFAULT_POLYGON_ANIMATION_DEGREE_DELAY * (polygonIndex-1);
+        float rotationDelay = mPolygonAnimationDegreeDelay * (polygonIndex-1);
         double degreeDelay;
         if (rotationDelay <= mAnimationProgressValue && mAnimationProgressValue <= 360 + rotationDelay) {
             degreeDelay = Math.PI * ((double)(mAnimationProgressValue - rotationDelay) / 180 + 1.5);
